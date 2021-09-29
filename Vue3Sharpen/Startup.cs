@@ -46,14 +46,17 @@ namespace Vue3Sharpen
              {
                  options.RequireHttpsMetadata = false;
                  options.SaveToken = true;
+
                  options.TokenValidationParameters = new TokenValidationParameters
                  {
                      ValidateIssuerSigningKey = true,
                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secretsecretsecretsecret")),
-                     ValidateIssuer = false,
-                     ValidateAudience = false,
+                     ValidateIssuer =  false,
+                     ValidateAudience = true,
                      ValidateLifetime = true,
-                     RequireExpirationTime = false
+                     ValidIssuer = "http://localhost:8080",
+                     ValidAudience = "http://localhost:8080",
+                     RequireExpirationTime = false,
                  };
              });
             

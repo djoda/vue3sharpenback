@@ -17,7 +17,7 @@ namespace Vue3Sharpen.Controllers
         }   
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public JsonResult secret()
         {
             return new JsonResult("secret");

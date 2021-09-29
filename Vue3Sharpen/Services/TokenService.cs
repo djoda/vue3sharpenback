@@ -17,9 +17,12 @@ namespace Vue3Sharpen.Services
             var key = Encoding.ASCII.GetBytes("secretsecretsecretsecret");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, username) }),
+                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, username) ,new Claim(ClaimTypes.Role, "Admin")}),
                 Expires = DateTime.UtcNow.AddDays(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Issuer = "http://localhost:8080",
+                Audience = "http://localhost:8080",
+                
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
